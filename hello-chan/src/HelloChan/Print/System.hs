@@ -1,4 +1,4 @@
-module HelloChan.System
+module HelloChan.Print.System
   ( System
   , io
   ) where
@@ -9,10 +9,8 @@ import Control.Exception.Safe (MonadCatch, MonadThrow)
 import Control.Monad.Except (ExceptT(..), runExceptT)
 import Data.Text (Text, unpack)
 
-import qualified HelloChan.ConsoleImpl as Console
-import qualified HelloChan.ConfigurationImpl as Configuration
-import HelloChan.Console (Console(..))
-import HelloChan.Configuration (Configuration(..))
+import qualified HelloChan.Print.ConsoleImpl as Console
+import HelloChan.Print.Console (Console(..))
 
 newtype System a = System { unSystem :: ExceptT Text IO a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow)
@@ -23,8 +21,4 @@ io system = do
   either (error . unpack) return result
 
 instance Console System where
-  sysArg = Console.sysArg
   stdout = Console.stdout
-
-instance Configuration System where
-  target = Configuration.target
