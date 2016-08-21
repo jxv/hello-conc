@@ -1,0 +1,17 @@
+resolver:
+  lts-6.11
+
+packages:
+- '.'
+
+extra-deps:
+  [ safe-exceptions-0.1.4.0
+  , test-fixture-0.4.0.0
+  , text-conversions-0.3.0
+  ]
+
+flags:
+  {}
+
+extra-package-dbs:
+  []
