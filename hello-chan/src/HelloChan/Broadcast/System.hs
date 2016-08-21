@@ -12,7 +12,7 @@ import Data.Text (Text, unpack)
 newtype System a = System { unSystem :: ExceptT Text IO a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow)
 
-io :: System a -> IO a
-io system = do
+io :: System a -> (Text -> IO (), Int) -> IO a
+io system (sender, number) = do
   result <- runExceptT (unSystem system)
   either (error . unpack) return result

@@ -15,8 +15,8 @@ import HelloChan.Print.Console (Console(..))
 newtype System a = System { unSystem :: ExceptT Text IO a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow)
 
-io :: System a -> IO a
-io system = do
+io :: System a -> IO Text -> IO a
+io system receive = do
   result <- runExceptT (unSystem system)
   either (error . unpack) return result
 
