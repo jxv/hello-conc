@@ -31,12 +31,19 @@ library
   exposed-modules:
     HelloChan.Control.System
     HelloChan.Control.Run
+    HelloChan.Control.HasNumber
+    HelloChan.Control.Forker
     HelloChan.Control.Console
     HelloChan.Control.ConsoleImpl
     HelloChan.Broadcast.System
     HelloChan.Broadcast.Run
+    HelloChan.Broadcast.HasNumber
+    HelloChan.Broadcast.Broadcaster
+    HelloChan.Broadcast.Delayer
+    HelloChan.Broadcast.DelayerImpl
     HelloChan.Print.System
     HelloChan.Print.Run
+    HelloChan.Print.Receiver
     HelloChan.Print.Console
     HelloChan.Print.ConsoleImpl
   build-depends:
