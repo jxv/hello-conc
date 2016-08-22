@@ -29,6 +29,8 @@ library
   hs-source-dirs:
     src
   exposed-modules:
+    HelloChan.Run
+
     HelloChan.Control.System
     HelloChan.Control.Run
     HelloChan.Control.HasNumber
