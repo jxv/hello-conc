@@ -31,8 +31,9 @@ library
   exposed-modules:
     HelloChan.Run
     HelloChan.System
-    HelloChan.Interthread
     HelloChan.Chan
+    HelloChan.Interthread
+    HelloChan.Subsystem
     HelloChan.Control.System
     HelloChan.Control.Run
     HelloChan.Control.HasNumber
@@ -45,11 +46,11 @@ library
     HelloChan.Broadcast.Broadcaster
     HelloChan.Broadcast.Delayer
     HelloChan.Broadcast.DelayerImpl
-    HelloChan.Print.System
-    HelloChan.Print.Run
-    HelloChan.Print.Receiver
-    HelloChan.Print.Console
-    HelloChan.Print.ConsoleImpl
+    HelloChan.Printy.System
+    HelloChan.Printy.Run
+    HelloChan.Printy.Receiver
+    HelloChan.Printy.Console
+    HelloChan.Printy.ConsoleImpl
   build-depends:
       base >= 4.7 && < 5
     , text

@@ -1,4 +1,4 @@
-module HelloChan.Print.Console
+module HelloChan.Printy.Console
   ( Console(..)
   ) where
 

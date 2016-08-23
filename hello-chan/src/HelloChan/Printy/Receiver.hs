@@ -1,4 +1,4 @@
-module HelloChan.Print.Receiver
+module HelloChan.Printy.Receiver
   ( Receiver(..)
   ) where
 

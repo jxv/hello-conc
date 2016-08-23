@@ -8,13 +8,14 @@ import qualified Control.Concurrent.Chan as IO (Chan, newChan, writeChan, readCh
 import Control.Monad.IO.Class (MonadIO(liftIO))
 import Data.Functor (void)
 
-import qualified HelloChan.Control.Run as C (run)
-import qualified HelloChan.Control.System as C (io)
-import qualified HelloChan.Broadcast.Run as B (run)
-import qualified HelloChan.Broadcast.System as B (io)
-import qualified HelloChan.Print.Run as P (run)
-import qualified HelloChan.Print.System as P (io)
+import qualified HelloChan.Control.Run as Control (run)
+import qualified HelloChan.Control.System as Control (io)
+import qualified HelloChan.Broadcast.Run as Broadcast (run)
+import qualified HelloChan.Broadcast.System as Broadcast (io)
+import qualified HelloChan.Printy.Run as Printy (run)
+import qualified HelloChan.Printy.System as Printy (io)
 import HelloChan.Interthread (Interthread(..))
+import HelloChan.Subsystem (Control(..), Broadcast(..), Printy(..))
 import HelloChan.Chan (Chan(..))
 
 newtype System a = System { unSystem :: IO a }
@@ -31,6 +32,15 @@ instance Interthread System where
       , _readChan = liftIO (IO.readChan chan)
       }
   fork = liftIO . void . IO.forkIO . unSystem
-  runControl (forkBroadcast, number) = liftIO $ C.io C.run (io . forkBroadcast, number)
-  runBroadcast (send, number) = liftIO $ B.io B.run (io . send, number)
-  runPrint recv = liftIO $ P.io P.run (io recv)
+
+instance Control System where
+  control (forkBroadcast, number) = liftIO $
+    Control.io Control.run (io . forkBroadcast, number)
+
+instance Broadcast System where
+  broadcast (send, number) = liftIO $
+    Broadcast.io Broadcast.run (io . send, number)
+
+instance Printy System where
+  printy recv = liftIO $
+    Printy.io Printy.run (io recv)

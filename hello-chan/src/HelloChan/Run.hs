@@ -3,11 +3,11 @@ module HelloChan.Run
   ) where
 
 import HelloChan.Interthread (Interthread(..))
+import HelloChan.Subsystem (Control(..), Broadcast(..), Printy(..))
 import HelloChan.Chan (Chan(..))
 
-run :: Interthread m => m ()
+run :: (Interthread m, Control m, Broadcast m, Printy m) => m ()
 run = do
   chan <- newChan
-  fork $ runControl
-    (\number -> fork $ runBroadcast (_writeChan chan, number), 0)
-  runPrint (_readChan chan)
+  fork $ control (\number -> fork $ broadcast (_writeChan chan, number), 0)
+  printy (_readChan chan)
