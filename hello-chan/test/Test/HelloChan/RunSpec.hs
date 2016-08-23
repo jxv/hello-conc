@@ -6,6 +6,12 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
+import HelloChan.Run (run)
+import HelloChan.Interthread (Interthread)
+import HelloChan.Subsystem (Control, Broadcast, Printy)
+
+mkFixture "Fixture" [''Control, ''Broadcast, ''Printy] -- `Interthread` breaks `mkFixture`
+
 spec :: Spec
 spec = do
   describe "run" $ do
