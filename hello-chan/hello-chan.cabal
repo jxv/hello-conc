@@ -30,7 +30,9 @@ library
     src
   exposed-modules:
     HelloChan.Run
-
+    HelloChan.System
+    HelloChan.Interthread
+    HelloChan.Chan
     HelloChan.Control.System
     HelloChan.Control.Run
     HelloChan.Control.HasNumber
