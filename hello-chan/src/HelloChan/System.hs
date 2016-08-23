@@ -4,7 +4,7 @@ module HelloChan.System
   ) where
 
 import qualified Control.Concurrent as IO (forkIO)
-import qualified Control.Concurrent.Chan as IO (Chan, newChan, writeChan, readChan)
+import qualified Control.Concurrent.Chan as IO (newChan, writeChan, readChan)
 import Control.Monad.IO.Class (MonadIO(liftIO))
 import Data.Functor (void)
 
@@ -14,9 +14,8 @@ import qualified HelloChan.Broadcast.Run as Broadcast (run)
 import qualified HelloChan.Broadcast.System as Broadcast (io)
 import qualified HelloChan.Printy.Run as Printy (run)
 import qualified HelloChan.Printy.System as Printy (io)
-import HelloChan.Interthread (Interthread(..))
+import HelloChan.Interthread (Interthread(..), Chan(..))
 import HelloChan.Subsystem (Control(..), Broadcast(..), Printy(..))
-import HelloChan.Chan (Chan(..))
 
 newtype System a = System { unSystem :: IO a }
   deriving (Functor, Applicative, Monad, MonadIO)

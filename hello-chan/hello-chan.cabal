@@ -31,7 +31,6 @@ library
   exposed-modules:
     HelloChan.Run
     HelloChan.System
-    HelloChan.Chan
     HelloChan.Interthread
     HelloChan.Subsystem
     HelloChan.Control.System

@@ -2,9 +2,8 @@ module HelloChan.Run
   ( run
   ) where
 
-import HelloChan.Interthread (Interthread(..))
+import HelloChan.Interthread (Interthread(..), Chan(..))
 import HelloChan.Subsystem (Control(..), Broadcast(..), Printy(..))
-import HelloChan.Chan (Chan(..))
 
 run :: (Interthread m, Control m, Broadcast m, Printy m) => m ()
 run = do
