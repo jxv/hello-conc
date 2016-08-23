@@ -1,12 +1,12 @@
-module HelloChan.Print.Run
+module HelloChan.Printy.Run
   ( run
   , go
   ) where
 
 import Control.Monad (forever)
 
-import HelloChan.Print.Console (Console(stdout))
-import HelloChan.Print.Receiver (Receiver(receiveMessage))
+import HelloChan.Printy.Console (Console(stdout))
+import HelloChan.Printy.Receiver (Receiver(receiveMessage))
 
 run :: (Console m, Receiver m) => m ()
 run = forever go

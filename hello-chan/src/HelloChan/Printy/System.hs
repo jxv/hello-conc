@@ -1,4 +1,4 @@
-module HelloChan.Print.System
+module HelloChan.Printy.System
   ( System
   , io
   ) where
@@ -11,9 +11,9 @@ import Control.Exception.Safe (MonadCatch, MonadThrow)
 import Control.Monad.Except (ExceptT(..), runExceptT)
 import Data.Text (Text, unpack)
 
-import qualified HelloChan.Print.ConsoleImpl as Console
-import HelloChan.Print.Console (Console(..))
-import HelloChan.Print.Receiver (Receiver(..))
+import qualified HelloChan.Printy.ConsoleImpl as Console
+import HelloChan.Printy.Console (Console(..))
+import HelloChan.Printy.Receiver (Receiver(..))
 
 newtype System a = System { unSystem :: ReaderT (IO Text) (ExceptT Text IO) a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadReader (IO Text))

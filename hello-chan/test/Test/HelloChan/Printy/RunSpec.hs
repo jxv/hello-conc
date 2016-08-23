@@ -1,4 +1,4 @@
-module Test.HelloChan.Print.RunSpec (spec) where
+module Test.HelloChan.Printy.RunSpec (spec) where
 
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
@@ -6,9 +6,9 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import HelloChan.Print.Run (go)
-import HelloChan.Print.Console (Console)
-import HelloChan.Print.Receiver (Receiver)
+import HelloChan.Printy.Run (go)
+import HelloChan.Printy.Console (Console)
+import HelloChan.Printy.Receiver (Receiver)
 
 
 mkFixture "Fixture" [''Console, ''Receiver]
