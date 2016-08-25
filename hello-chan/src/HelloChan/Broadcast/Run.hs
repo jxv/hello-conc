@@ -4,10 +4,11 @@ module HelloChan.Broadcast.Run
 
 import Data.Text (pack)
 
-import HelloChan.Broadcast.Delayer (Delayer(delay))
-import HelloChan.Broadcast.HasNumber (HasNumber(getNumber))
-import HelloChan.Broadcast.Broadcaster (Broadcaster(broadcast))
-
+import HelloChan.Broadcast.Parts
+  ( Delayer(delay)
+  , HasNumber(getNumber)
+  , Broadcaster(broadcast)
+  )
 
 run :: (Broadcaster m, Delayer m, HasNumber m) => m ()
 run = do

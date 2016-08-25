@@ -1,17 +1,16 @@
 module HelloChan.Printy.Run
   ( run
-  , go
+  , step
   ) where
 
 import Control.Monad (forever)
 
-import HelloChan.Printy.Console (Console(stdout))
-import HelloChan.Printy.Receiver (Receiver(receiveMessage))
+import HelloChan.Printy.Parts (Console(stdout), Receiver(receiveMessage))
 
 run :: (Console m, Receiver m) => m ()
-run = forever go
+run = forever step
 
-go :: (Console m, Receiver m) => m ()
-go = do
+step :: (Console m, Receiver m) => m ()
+step = do
   message <- receiveMessage
   stdout message

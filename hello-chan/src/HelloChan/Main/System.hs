@@ -1,4 +1,4 @@
-module HelloChan.System
+module HelloChan.Main.System
   ( System
   , io
   ) where
@@ -14,8 +14,8 @@ import qualified HelloChan.Broadcast.Run as Broadcast (run)
 import qualified HelloChan.Broadcast.System as Broadcast (io)
 import qualified HelloChan.Printy.Run as Printy (run)
 import qualified HelloChan.Printy.System as Printy (io)
-import HelloChan.Interthread (Interthread(..), Chan(..))
-import HelloChan.Subsystem (Control(..), Broadcast(..), Printy(..))
+import HelloChan.Main.Parts (Interthread(..), Control(..), Broadcast(..), Printy(..))
+import HelloChan.Main.Types (Chan(..))
 
 newtype System a = System { unSystem :: IO a }
   deriving (Functor, Applicative, Monad, MonadIO)
