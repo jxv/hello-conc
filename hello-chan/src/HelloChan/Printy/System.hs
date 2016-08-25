@@ -12,8 +12,7 @@ import Control.Monad.Except (ExceptT(..), runExceptT)
 import Data.Text (Text, unpack)
 
 import qualified HelloChan.Printy.ConsoleImpl as Console
-import HelloChan.Printy.Console (Console(..))
-import HelloChan.Printy.Receiver (Receiver(..))
+import HelloChan.Printy.Parts (Console(..), Receiver(..))
 
 newtype System a = System { unSystem :: ReaderT (IO Text) (ExceptT Text IO) a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadReader (IO Text))

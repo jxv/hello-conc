@@ -6,16 +6,15 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import HelloChan.Printy.Run (go)
-import HelloChan.Printy.Console (Console)
-import HelloChan.Printy.Receiver (Receiver)
+import HelloChan.Printy.Run (step)
+import HelloChan.Printy.Parts (Console, Receiver)
 
 
 mkFixture "Fixture" [''Console, ''Receiver]
 
 spec :: Spec
 spec = do
-  describe "go" $ do
+  describe "step" $ do
     it "should call stdout with received message" $ do
       let stubMessage = "MESSAGE"
       let fixture = def
@@ -24,5 +23,5 @@ spec = do
                 log "stdout"
                 lift $ msg `shouldBe` stubMessage
             }
-      captured <- logTestFixtureT go fixture
+      captured <- logTestFixtureT step fixture
       captured `shouldBe` ["stdout"]

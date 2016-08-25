@@ -29,26 +29,21 @@ library
   hs-source-dirs:
     src
   exposed-modules:
-    HelloChan.Run
-    HelloChan.System
-    HelloChan.Interthread
-    HelloChan.Subsystem
+    HelloChan.Main.System
+    HelloChan.Main.Run
+    HelloChan.Main.Types
+    HelloChan.Main.Parts
     HelloChan.Control.System
     HelloChan.Control.Run
-    HelloChan.Control.HasNumber
-    HelloChan.Control.Forker
-    HelloChan.Control.Console
+    HelloChan.Control.Parts
     HelloChan.Control.ConsoleImpl
     HelloChan.Broadcast.System
     HelloChan.Broadcast.Run
-    HelloChan.Broadcast.HasNumber
-    HelloChan.Broadcast.Broadcaster
-    HelloChan.Broadcast.Delayer
+    HelloChan.Broadcast.Parts
     HelloChan.Broadcast.DelayerImpl
     HelloChan.Printy.System
     HelloChan.Printy.Run
-    HelloChan.Printy.Receiver
-    HelloChan.Printy.Console
+    HelloChan.Printy.Parts
     HelloChan.Printy.ConsoleImpl
   build-depends:
       base >= 4.7 && < 5

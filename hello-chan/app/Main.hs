@@ -1,7 +1,7 @@
 module Main (main) where
 
-import HelloChan.System (io)
-import HelloChan.Run (run)
+import HelloChan.Main.System (io)
+import HelloChan.Main.Run (run)
 
 main :: IO ()
 main = io run

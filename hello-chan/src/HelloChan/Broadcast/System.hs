@@ -11,9 +11,7 @@ import Control.Monad.Except (ExceptT(..), runExceptT)
 import Data.Text (Text, unpack)
 
 import qualified HelloChan.Broadcast.DelayerImpl as Delayer
-import HelloChan.Broadcast.Delayer (Delayer(..))
-import HelloChan.Broadcast.HasNumber (HasNumber(..))
-import HelloChan.Broadcast.Broadcaster (Broadcaster(..))
+import HelloChan.Broadcast.Parts (Delayer(..), HasNumber(..), Broadcaster(..))
 
 newtype System a = System { unSystem :: ExceptT Text (ReaderT (Text -> IO (), Int) IO) a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadReader (Text -> IO (), Int))

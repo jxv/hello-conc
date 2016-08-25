@@ -12,9 +12,7 @@ import Control.Monad.Except (ExceptT(..), runExceptT)
 import Data.Text (Text, unpack)
 
 import qualified HelloChan.Control.ConsoleImpl as Console
-import HelloChan.Control.Console (Console(..))
-import HelloChan.Control.HasNumber (HasNumber(..))
-import HelloChan.Control.Forker (Forker(..))
+import HelloChan.Control.Parts (Console(..), HasNumber(..), Forker(..))
 
 newtype System a = System { unSystem :: ExceptT Text (ReaderT (Int -> IO ()) (StateT Int IO)) a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadState Int, MonadReader (Int -> IO ()))
