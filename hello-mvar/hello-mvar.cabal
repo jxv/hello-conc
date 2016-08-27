@@ -1,0 +1,119 @@
+name:
+  hello-mvar
+version:
+  0.1.0.0
+synopsis:
+  Template for sharing blocking and mutable variable(s) between threads
+description:
+  Template for sharing blocking and mutable variable(s) between threads
+homepage:
+  https://github.com/jxv/hello-conc#readme
+license:
+  BSD3
+license-file:
+  LICENSE
+author:
+  Joe Vargas
+maintainer:
+  https://github.com/jxv
+copyright:
+  2016 Joe Vargas
+category:
+  Test
+build-type:
+  Simple
+cabal-version:
+  >=1.10
+
+library
+  hs-source-dirs:
+    src
+  exposed-modules:
+    HelloMVar.Main.System
+    HelloMVar.Main.Run
+    HelloMVar.Main.Types
+    HelloMVar.Main.Parts
+    HelloMVar.Control.System
+    HelloMVar.Control.Run
+    HelloMVar.Control.Parts
+    HelloMVar.Control.ConsoleImpl
+    HelloMVar.Setter.System
+    HelloMVar.Setter.Run
+    HelloMVar.Setter.Parts
+    HelloMVar.Printy.System
+    HelloMVar.Printy.Run
+    HelloMVar.Printy.Parts
+    HelloMVar.Printy.ConsoleImpl
+    HelloMVar.Printy.DelayerImpl
+  build-depends:
+      base >= 4.7 && < 5
+    , text
+    , mtl
+    , safe-exceptions
+    , transformers
+    , time
+    , text-conversions
+    , safe
+  default-extensions:
+    OverloadedStrings
+    FlexibleContexts
+    GeneralizedNewtypeDeriving
+  ghc-options:
+    -Werror
+  default-language:
+    Haskell2010
+
+executable hello-mvar-exe
+  hs-source-dirs:
+    app
+  main-is:
+    Main.hs
+  ghc-options:
+    -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base
+    , hello-mvar
+    , text
+    , mtl
+    , transformers
+    , text-conversions
+    , time
+    , either
+  ghc-options:
+    -Werror
+  default-language:
+    Haskell2010
+
+test-suite hello-mvar-test
+  type:
+    exitcode-stdio-1.0
+  hs-source-dirs:
+    test
+  main-is:
+    Spec.hs
+  build-depends:
+      base
+    , hello-mvar
+    , test-fixture
+    , hspec
+    , text
+    , text-conversions
+    , transformers
+    , mtl
+    , time
+    , data-default
+  ghc-options:
+    -threaded -rtsopts -with-rtsopts=-N -Werror
+  default-language:
+    Haskell2010
+  default-extensions:
+    TypeSynonymInstances
+    FlexibleInstances
+    OverloadedStrings
+    TemplateHaskell
+
+source-repository head
+  type:
+    git
+  location:
+    https://github.com/jxv/hello-chan
