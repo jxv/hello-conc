@@ -1,4 +1,4 @@
-module HelloTVar.Broadcast.Types
+module HelloTVar.Printy.Types
   ( Seconds(..)
   ) where
 

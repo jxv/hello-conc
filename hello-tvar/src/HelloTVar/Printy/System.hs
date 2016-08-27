@@ -12,12 +12,13 @@ import Control.Monad.Except (ExceptT(..), runExceptT)
 import Data.Text (Text, unpack)
 
 import qualified HelloTVar.Printy.ConsoleImpl as Console
-import HelloTVar.Printy.Parts (Console(..), Receiver(..))
+import qualified HelloTVar.Printy.DelayerImpl as Delayer
+import HelloTVar.Printy.Parts (Console(..), Receiver(..), Delayer(..))
 
-newtype System a = System { unSystem :: ReaderT (IO Text) (ExceptT Text IO) a }
-  deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadReader (IO Text))
+newtype System a = System { unSystem :: ReaderT (IO Int) (ExceptT Text IO) a }
+  deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadReader (IO Int))
 
-io :: System a -> IO Text -> IO a
+io :: System a -> IO Int -> IO a
 io system receive = do
   result <- runExceptT (runReaderT (unSystem system) receive)
   either (error . unpack) return result
@@ -26,4 +27,7 @@ instance Console System where
   stdout = Console.stdout
 
 instance Receiver System where
-  receiveMessage = ask >>= \recvMsg -> liftIO recvMsg
+  receiveValue = ask >>= \recv -> liftIO recv
+
+instance Delayer System where
+  delay = Delayer.delay

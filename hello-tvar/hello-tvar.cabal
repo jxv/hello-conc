@@ -37,14 +37,14 @@ library
     HelloTVar.Control.Run
     HelloTVar.Control.Parts
     HelloTVar.Control.ConsoleImpl
-    HelloTVar.Broadcast.System
-    HelloTVar.Broadcast.Run
-    HelloTVar.Broadcast.Parts
-    HelloTVar.Broadcast.DelayerImpl
+    HelloTVar.Setter.System
+    HelloTVar.Setter.Run
+    HelloTVar.Setter.Parts
     HelloTVar.Printy.System
     HelloTVar.Printy.Run
     HelloTVar.Printy.Parts
     HelloTVar.Printy.ConsoleImpl
+    HelloTVar.Printy.DelayerImpl
   build-depends:
       base >= 4.7 && < 5
     , text
@@ -54,6 +54,7 @@ library
     , time
     , text-conversions
     , safe
+    , stm
   default-extensions:
     OverloadedStrings
     FlexibleContexts

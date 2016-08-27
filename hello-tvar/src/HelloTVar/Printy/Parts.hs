@@ -1,12 +1,18 @@
 module HelloTVar.Printy.Parts
   ( Console(..)
   , Receiver(..)
+  , Delayer(..)
   ) where
 
 import Data.Text (Text)
+
+import HelloTVar.Printy.Types (Seconds)
 
 class Monad m => Console m where
   stdout :: Text -> m ()
 
 class Monad m => Receiver m where
-  receiveMessage :: m Text
+  receiveValue :: m Int
+
+class Monad m => Delayer m where
+  delay :: Seconds -> m ()

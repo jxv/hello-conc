@@ -1,8 +1,8 @@
 module HelloTVar.Main.Types
-  ( Chan(..)
+  ( TVar(..)
   ) where
 
-data Chan m a = Chan
-  { _writeChan :: a -> m ()
-  , _readChan :: m a
+data TVar m a = TVar
+  { _readTVar :: m a
+  , _writeTVar :: a -> m ()
   }

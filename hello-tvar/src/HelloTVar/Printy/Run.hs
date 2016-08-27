@@ -4,13 +4,20 @@ module HelloTVar.Printy.Run
   ) where
 
 import Control.Monad (forever)
+import Data.Text (pack)
 
-import HelloTVar.Printy.Parts (Console(stdout), Receiver(receiveMessage))
+import HelloTVar.Printy.Types (Seconds(..))
+import HelloTVar.Printy.Parts
+  ( Console(stdout)
+  , Receiver(receiveValue)
+  , Delayer(delay)
+  )
 
-run :: (Console m, Receiver m) => m ()
+run :: (Console m, Receiver m, Delayer m) => m ()
 run = forever step
 
-step :: (Console m, Receiver m) => m ()
+step :: (Console m, Receiver m, Delayer m) => m ()
 step = do
-  message <- receiveMessage
-  stdout message
+  val <- receiveValue
+  stdout . pack . show $ val
+  delay (Seconds 5)

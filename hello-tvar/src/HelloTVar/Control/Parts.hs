@@ -12,7 +12,7 @@ class Monad m => Console m where
   getLine :: m Text
 
 class Monad m => Forker m where
-  forkBroadcast :: Int -> m ()
+  forkUpdater :: Int -> m ()
 
 class Monad m => HasNumber m where
   getNumber :: m Int

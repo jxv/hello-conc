@@ -18,8 +18,8 @@ newtype System a = System { unSystem :: ExceptT Text (ReaderT (Int -> IO ()) (St
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadState Int, MonadReader (Int -> IO ()))
 
 io :: System a -> (Int -> IO (), Int) -> IO a
-io system (broadcast, number) = do
-  result <- evalStateT (runReaderT (runExceptT (unSystem system)) broadcast) number
+io system (updater, number) = do
+  result <- evalStateT (runReaderT (runExceptT (unSystem system)) updater) number
   either (error . unpack) return result
 
 instance Console System where
@@ -30,6 +30,6 @@ instance HasNumber System where
   getNumber = get
 
 instance Forker System where
-  forkBroadcast number = do
+  forkUpdater number = do
     f <- ask
     liftIO $ f number
