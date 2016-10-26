@@ -1,4 +1,4 @@
-module Test.HelloChan.Broadcast.RunSpec (spec) where
+module Test.HelloChan.ControlSpec (spec) where
 
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
@@ -6,7 +6,9 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import HelloChan.Broadcast.Run (run)
+import HelloChan.Control
+
+mkFixture "Fixture" [''Console, ''Forker, ''HasNumber]
 
 spec :: Spec
 spec = do

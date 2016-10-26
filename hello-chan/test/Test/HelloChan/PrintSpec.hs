@@ -1,4 +1,4 @@
-module Test.HelloChan.Printy.RunSpec (spec) where
+module Test.HelloChan.PrintSpec (spec) where
 
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
@@ -6,9 +6,7 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import HelloChan.Printy.Run (step)
-import HelloChan.Printy.Parts (Console, Receiver)
-
+import HelloChan.Print
 
 mkFixture "Fixture" [''Console, ''Receiver]
 
@@ -19,7 +17,7 @@ spec = do
       let stubMessage = "MESSAGE"
       let fixture = def
             { _receiveMessage = return stubMessage
-            , _stdout = \msg -> do
+            , _writeLine = \msg -> do
                 log "stdout"
                 lift $ msg `shouldBe` stubMessage
             }

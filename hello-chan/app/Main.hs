@@ -1,7 +1,6 @@
 module Main (main) where
 
-import HelloChan.Main.System (io)
-import HelloChan.Main.Run (run)
+import qualified  HelloChan as HelloChan (main, runIO)
 
 main :: IO ()
-main = io run
+main = HelloChan.runIO HelloChan.main
