@@ -1,7 +1,6 @@
 module Main (main) where
 
-import HelloTVar.Main.System (io)
-import HelloTVar.Main.Run (run)
+import qualified HelloTVar (runIO, main)
 
 main :: IO ()
-main = io run
+main = HelloTVar.runIO HelloTVar.main

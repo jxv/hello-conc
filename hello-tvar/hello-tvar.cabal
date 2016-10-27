@@ -29,22 +29,10 @@ library
   hs-source-dirs:
     src
   exposed-modules:
-    HelloTVar.Main.System
-    HelloTVar.Main.Run
-    HelloTVar.Main.Types
-    HelloTVar.Main.Parts
-    HelloTVar.Control.System
-    HelloTVar.Control.Run
-    HelloTVar.Control.Parts
-    HelloTVar.Control.ConsoleImpl
-    HelloTVar.Setter.System
-    HelloTVar.Setter.Run
-    HelloTVar.Setter.Parts
-    HelloTVar.Printy.System
-    HelloTVar.Printy.Run
-    HelloTVar.Printy.Parts
-    HelloTVar.Printy.ConsoleImpl
-    HelloTVar.Printy.DelayerImpl
+    HelloTVar
+    HelloTVar.Control
+    HelloTVar.Assignment
+    HelloTVar.Print
   build-depends:
       base >= 4.7 && < 5
     , text
