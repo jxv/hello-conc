@@ -4,7 +4,7 @@ module HelloChan.Broadcast
   , Delayer(..)
   , HasNumber(..)
   , main
-  , System
+  , BroadcastM
   , runIO
   ) where
 
@@ -39,23 +39,23 @@ main = do
   broadcast $ "Bye, World! - " `mappend`textNumber
 
 
-newtype System a = System { unSystem :: ExceptT Text (ReaderT (Text -> IO (), Int) IO) a }
+newtype BroadcastM a = BroadcastM { unBroadcastM :: ExceptT Text (ReaderT (Text -> IO (), Int) IO) a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadReader (Text -> IO (), Int))
 
-runIO :: MonadIO m => System a -> (Text -> IO (), Int) -> m a
-runIO system env@(sender, number) = liftIO $ do
-  result <- runReaderT (runExceptT (unSystem system)) env
+runIO :: MonadIO m => BroadcastM a -> (Text -> IO (), Int) -> m a
+runIO (BroadcastM m) env@(sender, number) = liftIO $ do
+  result <- runReaderT (runExceptT m) env
   either (error . unpack) return result
 
-instance Delayer System where
+instance Delayer BroadcastM where
   delay (Seconds secs) = liftIO $ threadDelay (scale * secs)
     where
       scale = 10 ^ 6
 
-instance Broadcaster System where
+instance Broadcaster BroadcastM where
   broadcast msg = do
     (sender, _) <- ask
     liftIO $ sender msg
 
-instance HasNumber System where
+instance HasNumber BroadcastM where
   getNumber = snd <$> ask

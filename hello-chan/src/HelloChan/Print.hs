@@ -3,7 +3,7 @@ module HelloChan.Print
   , Receiver(..)
   , main
   , step
-  , Print
+  , PrintM
   , runIO
   ) where
 
@@ -32,16 +32,16 @@ step = do
   writeLine message
 
 
-newtype Print a = Print { unPrint :: ReaderT (IO Text) (ExceptT Text IO) a }
+newtype PrintM a = PrintM { unPrintM :: ReaderT (IO Text) (ExceptT Text IO) a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadReader (IO Text))
 
-runIO :: MonadIO m => Print a -> IO Text -> m a
-runIO (Print m) receive = liftIO $ do
+runIO :: MonadIO m => PrintM a -> IO Text -> m a
+runIO (PrintM m) receive = liftIO $ do
   result <- runExceptT (runReaderT m receive)
   either (error . unpack) return result
 
-instance Console Print where
+instance Console PrintM where
   writeLine = liftIO . T.putStrLn
 
-instance Receiver Print where
+instance Receiver PrintM where
   receiveMessage = ask >>= \recvMsg -> liftIO recvMsg

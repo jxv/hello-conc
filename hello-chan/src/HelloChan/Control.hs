@@ -4,7 +4,7 @@ module HelloChan.Control
   , HasNumber(..)
   , main
   , step
-  , System
+  , ControlM
   , runIO
   ) where
 
@@ -40,22 +40,22 @@ step = do
   putNumber (number + 1)
 
 
-newtype System a = System { unSystem :: ExceptT Text (ReaderT (Int -> IO ()) (StateT Int IO)) a }
+newtype ControlM a = ControlM { unControlM :: ExceptT Text (ReaderT (Int -> IO ()) (StateT Int IO)) a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow, MonadState Int, MonadReader (Int -> IO ()))
 
-runIO :: MonadIO m => System a -> (Int -> IO (), Int) -> m a
-runIO system (broadcast, number) = liftIO $ do
-  result <- evalStateT (runReaderT (runExceptT (unSystem system)) broadcast) number
+runIO :: MonadIO m => ControlM a -> (Int -> IO (), Int) -> m a
+runIO (ControlM m) (broadcast, number) = liftIO $ do
+  result <- evalStateT (runReaderT (runExceptT m) broadcast) number
   either (error . unpack) return result
 
-instance Console System where
+instance Console ControlM where
   readLine = liftIO T.getLine
 
-instance HasNumber System where
+instance HasNumber ControlM where
   putNumber = put
   getNumber = get
 
-instance Forker System where
+instance Forker ControlM where
   forkBroadcast number = do
     f <- ask
     liftIO $ f number
