@@ -1,7 +1,6 @@
 module Main (main) where
 
-import HelloMVar.Main.System (io)
-import HelloMVar.Main.Run (run)
+import qualified HelloMVar (runIO, main)
 
 main :: IO ()
-main = io run
+main = HelloMVar.runIO HelloMVar.main
